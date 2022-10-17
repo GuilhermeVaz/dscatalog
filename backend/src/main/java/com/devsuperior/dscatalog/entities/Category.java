@@ -3,7 +3,9 @@ package com.devsuperior.dscatalog.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
@@ -20,6 +22,13 @@ public class Category implements Serializable {
 
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant updateAt;
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    @ManyToMany(mappedBy = "categories")
+    private Set<Product> products = new HashSet<>();
 
     public Category() {
     }
@@ -63,6 +72,8 @@ public class Category implements Serializable {
         updateAt = Instant.now();
     }
 
+
+    //serve para comparar objetos pelo id
     public boolean equals(Object o) {
         if (this == o) {
             return true;

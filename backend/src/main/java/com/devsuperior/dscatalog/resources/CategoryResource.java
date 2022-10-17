@@ -1,18 +1,13 @@
 package com.devsuperior.dscatalog.resources;
 
 import com.devsuperior.dscatalog.dto.CategoryDTO;
-import com.devsuperior.dscatalog.entities.Category;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 
 import com.devsuperior.dscatalog.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -27,12 +22,10 @@ public class CategoryResource {
     @Autowired
     private CategoryService service;
 
-    @GetMapping
+    @GetMapping //buscar a info
     public ResponseEntity<Page<CategoryDTO>> findAll(Pageable pageable) {
-
         Page<CategoryDTO> list = service.findAllPaged(pageable);
-
-        return ResponseEntity.ok().body(list);
+        return ResponseEntity.ok().body(list); //retorna uma resposta 200
     }
 
     @GetMapping(value = "/{id}")//busca pelo id
